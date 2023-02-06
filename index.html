@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+      href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="shortcut icon" href="./assets/logo.ico" type="image/x-icon">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>PrajwalAcharya</title>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script> -->
+    <script type="module" src="./main.js"></script>
+    <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js";
+
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyC0ODdUq9X3adZmPF4rUgUMVoKXCMpGX9E",
+      authDomain: "mysite-73c4e.firebaseapp.com",
+      databaseURL: "https://mysite-73c4e-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "mysite-73c4e",
+      storageBucket: "mysite-73c4e.appspot.com",
+      messagingSenderId: "777126681223",
+      appId: "1:777126681223:web:7d2fa05a2c1199f82c3622",
+      measurementId: "G-RD6QL0SJR9"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.querySelector("#contactform");
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const nameInput = document.querySelector("#name");
+        const phoneInput = document.querySelector("#phone");
+        const emailInput = document.querySelector("#email");
+        const messageInput = document.querySelector("#message");
+        // Get form values
+        const name = nameInput.value;
+        const phone = phoneInput.value;
+        const email = emailInput.value;
+        const message = messageInput.value;
+        console.log(name, phone, email, message)
+        // Add a second document with a generated ID.
+
+        try {
+          const docRef = addDoc(collection(db, "users"), {
+            name: name,
+            phone: phone,
+            email: email,
+            message: message,
+
+          });
+          console.log("Document written with ID: ", docRef.id);
+        } catch (e) {
+          console.error("Error adding document: ", e);
+        }
+        nameInput.value = "";
+        phoneInput.value = "";
+        emailInput.value = "";
+        messageInput.value = "";
+        const alertModal = document.querySelector("#alertModal");
+        alertModal.classList.add("show");
+        alertModal.style.display = "block";
+        const closeBtn = document.querySelector(".close");
+        closeBtn.addEventListener("click", function () {
+          alertModal.style.display = "none";
+        });
+
+      });
+    });
+    // const analytics = getAnalytics(app);
+  </script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script> -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script> -->
+  </head>
+
+
+
+  <body data-bs-spy="scroll" data-bs-target="#navbar">
+
+    <div >
+      <header class="header_wrapper">
+        <nav class="navbar navbar-expand-lg fixed-top">
+          <div class="container">
+            <a class="navbar-brand" href="#home">
+              <img src="./assets/logo.ico" alt="logo" style="height:40px;"></a>
+            <button class="navbar-toggler" type="button"
+              data-bs-toggle="collapse" data-bs-target="#navbar"
+              aria-controls="navbar" aria-expanded="false" aria-label="Toggle
+              navigation">
+              <!-- <span class="navbar-toggler-icon"></span> -->
+              <i class="navbar-toggler-icon"></i>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end"
+              id="navbar">
+              <ul class="navbar-nav menu-navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="#home">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#about">About</a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="#mywork">My Work</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#contact">Contact</a>
+                </li>
+                
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <section id="home" class="banner_wrapper">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 text-center text-md-start">
+              <h6>WELCOME TO MY WORLD</h6>
+              <h1>I’m Prajwal Acharya<br><span>Developer.</span><br>based in
+                NEPAL.</h1>
+              <div class="mt-4">
+                <a class="main-btn" href="#contact">Hire me</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="about" class="about_wrapper">
+        <div class="container">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-lg-5  text-center  mb-4 mb-lg-0">
+            
+              <img
+                src="./assets/pp.png"
+                class="rounded-circle  ms-lg-0" height="250" width="250" alt="About
+                Us">
+              
+            </div>
+            <div class="col-lg-7 ps-lg-5 text-center text-lg-start">
+              <div class="my-5">
+
+                <h2>About Me</h2>
+                <p> I am a motivated and skilled Computer Engineer with a
+                  passion
+                  for technology and innovation.I have a
+                  proven
+                  track record of delivering high-quality solutions and software
+                  applications, demonstrating
+                  expertise in various programming languages and methodologies.
+                  I am
+                  dedicated to staying current with the
+                  latest
+                  technologies, continuously expanding my knowledge and skills,
+                  and
+                  seeking out new challenges to grow
+                  professionally. My exceptional problem-solving abilities,
+                  attention to detail, and ability to work well in a
+                  team make me a valuable asset to any project.</p>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </section>
+      <section id="mywork" class="services_wrapper">
+        <div class="container ">
+          <h1 class="text-center text-light">My Work</h1>
+          <div class="row row-cols-sm-1 row-cols-lg-4 justify-content-evenly"
+            id="work-list"></div>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              <li class="page-item" id="previousPage">
+                <button id="hov" class="main-btn1 page-link">Previous</button>
+              </li>
+              <li class="page-item" id="nextPage">
+                <button  class="main-btn1 page-link">Next</button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </section>
+      <section id="contact" class="contact_wrapper">
+        <div class="container col-lg-6 order-2 order-lg-1 pe-lg-5 text-lg-start text-center">
+          <h1 class="text-center">Contact</h1>
+          <div class="row call_details mb-4">
+            <label class="col-sm-3">Contact Email:</label>
+            <div class="col-sm-9 mb-3 mb-lg-2">
+                <a href="mailto:Prajwalsmart888@gmail.com">prajwalsmart888@gmail.com</a>
+            </div>
+        </div> 
+          <div class="container">
+            <form action="" data-form-title="CONTACT US" id="contactform">
+              <input type="hidden" data-form-email="true">
+              <div class="row form-group">
+                <div class="form-group mb-4 ">
+                  <input type="text" class="form-control rounded-pill" id="name"
+                    required="" placeholder="Name*"
+                    data-form-field="Name">
+                </div>
+
+                <div class="form-group mb-4">
+                  <input type="email" class="form-control rounded-pill"
+                    id="email" required="" placeholder="Email*"
+                    data-form-field="Email">
+                </div>
+                <div class="form-group mb-4 ">
+                  <input type="tel" class="form-control rounded-pill" id="phone"
+                    placeholder="Phone"
+                    data-form-field="Phone">
+                </div>
+
+                <div class="form-group mb-4">
+                  <input cols="40" rows="4" class="form-control rounded-pill" id="message"
+                    placeholder="Message" autocomplete="off"></input>
+                </div>
+                <div class="text-center">
+                  <button type="submit" class="main-btn">Submit</button>
+                </div>
+              </div>
+            </form>
+            
+          </div>
+         
+        </div>
+      </section>
+
+<!-- footer -->
+      <section id="contact" class="footer_wrapper mt-3 mt-md-0">
+      
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 ">
+              <p class="text-light">Copyright &copy; Prajwal Acharya</p>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <ul class="list-unstyled d-flex justify-content-center justify-content-md-end justify-content-lg-center jus social-icon mb-3 mb-md-0">
+                  <li>
+                      <a href="https://www.instagram.com/pr_a_z_0l/"><i class="fab fa-instagram"></i></a>
+                  </li>
+                  <li>
+                      <a href="https://www.facebook.com/prajwaal.acharya"><i class="fab fa-facebook-f"></i> </a>
+                  </li>
+                  <li>
+                      <a href="https://github.com/ImPrajwalAcharya"><i class="fab fa-github"></i></a>
+                  </li>
+                  <li>
+                      <a href="#"><i class="fab fa-linkedin-in"></i> </a>
+                  </li>
+              </ul>
+          </div>
+           
+          </div>
+        </div>
+     
+    </section>
+
+      <!-- <h1>Prajwal Acharya</h1> -->
+    </body>
+
+
+
+
+  </script>
+
+</html>
